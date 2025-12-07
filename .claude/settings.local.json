@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(active voice 75%+ of time\" 2. Did I cover essential categories? - Citation accuracy - Source verification - Writing clarity - Plagiarism checking - Review process 3. Are any standards unrealistic? Suggest 2-3 concrete improvements.''\")",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(powershell:*)",
+      "Bash(.specify/scripts/bash/create-phr.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,55 +1,68 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: None (initial) -> 0.1.0
+Modified principles:
+  - PRINCIPLE_1_NAME -> Technical Accuracy
+  - PRINCIPLE_2_NAME -> Clarity for Developers
+  - PRINCIPLE_3_NAME -> Modularity
+  - PRINCIPLE_4_NAME -> Actionability
+  - PRINCIPLE_5_NAME -> Key Standards
+Added sections:
+  - Constraints
+  - Success Criteria
+Removed sections: None
+Templates requiring updates:
+  - .specify/templates/plan-template.md: ✅ updated
+  - .specify/templates/spec-template.md: ✅ updated
+  - .specify/templates/tasks-template.md: ✅ updated
+  - .specify/templates/commands/*.md: ✅ updated
+Follow-up TODOs: None
+-->
+# AI-Driven Technical Book Built with Docusaurus Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Technical Accuracy
+Technical accuracy in topics like cloud, AI, vector databases, and RAG workflows.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Clarity for Developers
+Content must be clear and accessible for beginner-to-intermediate software engineers.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Modularity
+Chapters must be structured modularly to fit Docusaurus requirements.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Actionability
+Content must include practical steps, code snippets, and deployable instructions.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Key Standards
+*   All architecture, tools, and APIs must be explained with working examples.
+*   Code must follow TypeScript/JS best practices where relevant.
+*   Diagrams should be simple, clear, and reproducible.
+*   Writing tone: tutorial + reference manual.
+*   Use concise explanations, avoid unnecessary theory.
+*   Include step-by-step guides for:
+    *   Docusaurus setup
+    *   GitHub Pages deployment
+    *   RAG pipeline using OpenAI Agents/ChatKit + Gemini API
+    *   Qdrant + Neon Serverless Postgres integration
 
-### [PRINCIPLE_6_NAME]
+## Constraints
 
+*   Book length: 8–12 chapters
+*   Each chapter: 1,000–2,000 words
+*   Include minimum one code example per concept
+*   All instructions must be runnable on Windows + Linux
+*   Output format: Docusaurus-compatible Markdown
 
-[PRINCIPLE__DESCRIPTION]
+## Success Criteria
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+*   Book builds successfully in Docusaurus
+*   GitHub Pages deploys without errors
+*   RAG chatbot runs end-to-end: Ingestion → Embeddings → Qdrant → Retrieval → OpenAI/Gemini → Response
+*   All examples tested and functional
+*   Writing meets: Clear, structured, developer-friendly tone, Zero plagiarism
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+All PRs/reviews must verify compliance; Complexity must be justified; Use `.specify/memory/constitution.md` for runtime development guidance. Amendments require documentation, approval, and a migration plan.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 0.1.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06
