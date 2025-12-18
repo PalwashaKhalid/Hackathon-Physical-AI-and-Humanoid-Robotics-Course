@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useAuth } from '@better-auth/react';
 import './Auth.css';
 
 const SigninForm = ({ onSwitchToSignup }) => {
-  const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -25,16 +23,26 @@ const SigninForm = ({ onSwitchToSignup }) => {
     setError('');
 
     try {
-      const result = await signIn({
-        email: formData.email,
-        password: formData.password
-      });
+      // In a real implementation, this would call an actual authentication API
+      // For now, we'll simulate the process by checking if user exists in localStorage
+      // In production, this should connect to a real backend authentication service
 
-      if (result?.error) {
-        setError(result.error.message);
-      } else {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Check if user exists (mock implementation)
+      const storedProfile = localStorage.getItem('userProfile');
+      const profile = storedProfile ? JSON.parse(storedProfile) : null;
+
+      if (profile && profile.email === formData.email) {
+        // Set mock session
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('authToken', `mock_token_${profile.user_id}`);
+
         // Successful sign in - redirect to dashboard or previous page
         window.location.href = '/dashboard';
+      } else {
+        setError('Invalid email or password. This is a demo - try signing up first.');
       }
     } catch (err) {
       setError(err.message || 'An error occurred during sign in');

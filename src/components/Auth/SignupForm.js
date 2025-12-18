@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useAuth } from '@better-auth/react';
 import './Auth.css';
 
 const SignupForm = ({ onSwitchToSignin }) => {
-  const { signUp } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '',
@@ -52,38 +50,28 @@ const SignupForm = ({ onSwitchToSignin }) => {
     setError('');
 
     try {
-      // First, create the basic account
-      const result = await signUp({
-        email: formData.email,
-        password: formData.password,
-        name: formData.name
-      });
+      // In a real implementation, this would call an actual authentication API
+      // For now, we'll simulate the process and save user data to localStorage
+      // In production, this should connect to a real backend authentication service
 
-      if (result?.error) {
-        setError(result.error.message);
-        setLoading(false);
-        return;
-      }
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Then, save the profile information
-      const profileResponse = await fetch('/api/auth/profile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: result.userId || result.user.id, // depending on response format
-          ...formData
-        })
-      });
+      // Save user profile information to localStorage (mock implementation)
+      const mockUserId = `user_${Date.now()}`;
+      const userProfile = {
+        user_id: mockUserId,
+        ...formData,
+        created_at: new Date().toISOString()
+      };
 
-      if (!profileResponse.ok) {
-        setError('Failed to save profile information');
-        setLoading(false);
-        return;
-      }
+      localStorage.setItem('userProfile', JSON.stringify(userProfile));
+      localStorage.setItem('isLoggedIn', 'true');
 
-      // Success - user can now be redirected
+      // Set a mock session token
+      localStorage.setItem('authToken', `mock_token_${mockUserId}`);
+
+      // Success - redirect to dashboard
       window.location.href = '/dashboard'; // or wherever you want to redirect
     } catch (err) {
       setError(err.message || 'An error occurred during signup');

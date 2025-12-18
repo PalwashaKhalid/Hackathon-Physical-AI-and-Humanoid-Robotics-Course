@@ -1,46 +1,70 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useSession } from '@better-auth/react';
 
 const UserProfileContext = createContext();
 
 export const UserProfileProvider = ({ children }) => {
-  const { session, isPending } = useSession();
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user profile when session changes
+  // Load user profile from localStorage when component mounts
   useEffect(() => {
-    const loadProfile = async () => {
-      if (session?.user?.id) {
-        try {
-          const response = await fetch(`/api/auth/profile/${session.user.id}`, {
-            headers: {
-              'Authorization': `Bearer ${session.access_token}`
-            }
-          });
-          if (response.ok) {
-            const profile = await response.json();
-            setUserProfile(profile);
-          }
-        } catch (error) {
-          console.error('Error loading user profile:', error);
+    const loadProfile = () => {
+      try {
+        const storedProfile = localStorage.getItem('userProfile');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+        if (isLoggedIn === 'true' && storedProfile) {
+          const profile = JSON.parse(storedProfile);
+          setUserProfile(profile);
+        } else {
+          setUserProfile(null);
         }
-      } else {
+      } catch (error) {
+        console.error('Error loading user profile:', error);
         setUserProfile(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     loadProfile();
-  }, [session]);
+
+    // Set up storage event listener for cross-tab synchronization
+    const handleStorageChange = () => {
+      loadProfile();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const refreshProfile = () => {
+    const storedProfile = localStorage.getItem('userProfile');
+    if (storedProfile) {
+      const profile = JSON.parse(storedProfile);
+      setUserProfile(profile);
+    }
+  };
+
+  const signOut = () => {
+    localStorage.removeItem('userProfile');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('authToken');
+    setUserProfile(null);
+  };
 
   return (
     <UserProfileContext.Provider value={{
-      session,
       userProfile,
       setUserProfile,
       loading,
-      isPending
+      refreshProfile,
+      signOut,
+      session: userProfile ? { user: { id: userProfile.user_id, name: userProfile.name, email: userProfile.email } } : null,
+      isPending: false
     }}>
       {children}
     </UserProfileContext.Provider>

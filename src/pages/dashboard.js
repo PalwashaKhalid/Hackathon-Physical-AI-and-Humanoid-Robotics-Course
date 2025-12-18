@@ -191,26 +191,95 @@ const RAGChatbotWithAuth = () => {
 };
 
 const Dashboard = () => {
-  const { session, userProfile, loading } = useUserProfile();
+  const { session, userProfile, loading, signOut } = useUserProfile();
   const [personalizedContent, setPersonalizedContent] = useState(null);
 
+  // Generate personalized content based on user profile (client-side)
   useEffect(() => {
-    const fetchPersonalizedContent = async () => {
-      if (userProfile?.user_id) {
-        try {
-          const response = await fetch(`/api/auth/personalized-content/${userProfile.user_id}`);
-          if (response.ok) {
-            const data = await response.json();
-            setPersonalizedContent(data);
-          }
-        } catch (error) {
-          console.error('Error fetching personalized content:', error);
-        }
-      }
-    };
-
     if (userProfile) {
-      fetchPersonalizedContent();
+      // Generate recommendations based on user profile
+      const recommendations = [];
+
+      // Based on experience level
+      if (userProfile.experience_level === 'beginner') {
+        recommendations.push({
+          type: "content",
+          title: "Start with Fundamentals",
+          description: "We recommend beginning with the fundamentals chapter",
+          link: "/docs/chapter1-fundamentals",
+          priority: "high"
+        });
+      } else if (userProfile.experience_level === 'advanced' || userProfile.experience_level === 'expert') {
+        recommendations.push({
+          type: "content",
+          title: "Advanced Topics",
+          description: "Based on your experience, you might enjoy advanced topics",
+          link: "/docs/chapter7-advanced-topics",
+          priority: "high"
+        });
+      }
+
+      // Based on robotics interests
+      const interests = userProfile.robotics_interest || [];
+      if (interests.includes('ros2')) {
+        recommendations.push({
+          type: "content",
+          title: "ROS 2 Resources",
+          description: "Content related to ROS 2 based on your interests",
+          link: "/docs/chapter2-ros2",
+          priority: "medium"
+        });
+      }
+
+      if (interests.includes('simulation')) {
+        recommendations.push({
+          type: "content",
+          title: "Simulation Resources",
+          description: "Content related to simulation based on your interests",
+          link: "/docs/chapter3-simulation",
+          priority: "medium"
+        });
+      }
+
+      if (interests.includes('isaac')) {
+        recommendations.push({
+          type: "content",
+          title: "NVIDIA Isaac Resources",
+          description: "Content related to NVIDIA Isaac based on your interests",
+          link: "/docs/chapter4-isaac",
+          priority: "medium"
+        });
+      }
+
+      // Based on learning goal
+      const learningGoal = userProfile.learning_goal;
+      if (learningGoal === 'project') {
+        recommendations.push({
+          type: "content",
+          title: "Project-Based Learning",
+          description: "Practical content for your project-based learning goal",
+          link: "/docs/chapter6-complete-system",
+          priority: "high"
+        });
+      } else if (learningGoal === 'academic') {
+        recommendations.push({
+          type: "content",
+          title: "Academic Content",
+          description: "Theory-focused content for academic learning",
+          link: "/docs/chapter1-fundamentals",
+          priority: "high"
+        });
+      }
+
+      setPersonalizedContent({
+        user_id: userProfile.user_id,
+        recommendations: recommendations,
+        profile_summary: {
+          experience_level: userProfile.experience_level,
+          interests: interests,
+          learning_goal: userProfile.learning_goal
+        }
+      });
     }
   }, [userProfile]);
 
@@ -218,11 +287,14 @@ const Dashboard = () => {
     return <div className="dashboard-container">Loading...</div>;
   }
 
-  if (!session) {
+  if (!userProfile) {
     return (
       <div className="dashboard-container">
         <h1>Access Denied</h1>
         <p>Please sign in to access the dashboard.</p>
+        <div style={{ marginTop: '20px' }}>
+          <a href="/" className="btn-primary">Go to Home</a>
+        </div>
       </div>
     );
   }
