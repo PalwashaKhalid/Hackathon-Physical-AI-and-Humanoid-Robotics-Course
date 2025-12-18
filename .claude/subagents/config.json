@@ -1,0 +1,53 @@
+{
+  "subagents_system": {
+    "version": "1.0.0",
+    "enabled": true,
+    "debug_mode": false
+  },
+  "event_system": {
+    "file_watchers": {
+      "docs_directory": {
+        "path": "./docs",
+        "extensions": [".md"],
+        "events": ["create", "update", "delete"]
+      },
+      "api_directory": {
+        "path": "./rag_chatbot/api",
+        "extensions": [".py"],
+        "events": ["create", "update", "delete"]
+      }
+    },
+    "git_hooks": {
+      "pre_commit": ["doc-validator", "api-validator"],
+      "post_commit": ["vector-indexer"]
+    },
+    "scheduled_tasks": {
+      "daily": ["tech-fact-checker", "consistency-checker"],
+      "weekly": ["model-updater", "dependency-manager"],
+      "monthly": ["performance-audit"]
+    }
+  },
+  "skill_registry": {
+    "base_path": "./.claude/subagents/skills",
+    "categories": ["documentation", "rag", "quality", "frontend", "api", "build", "ai"]
+  },
+  "execution": {
+    "max_concurrent_tasks": 5,
+    "timeout_seconds": 300,
+    "retry_attempts": 3
+  },
+  "logging": {
+    "level": "info",
+    "output_file": "./.claude/subagents/logs/subagents.log",
+    "retention_days": 30
+  },
+  "api": {
+    "enabled": true,
+    "port": 8081,
+    "endpoints": {
+      "trigger_skill": "/api/skill/trigger",
+      "get_status": "/api/status",
+      "list_skills": "/api/skills"
+    }
+  }
+}

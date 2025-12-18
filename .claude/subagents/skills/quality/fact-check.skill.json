@@ -1,0 +1,43 @@
+{
+  "skillId": "tech-fact-checker",
+  "name": "Technical Fact Checker",
+  "description": "Verifies technical accuracy of content against known sources and standards",
+  "category": "quality",
+  "triggers": ["file-change", "pre-commit", "manual"],
+  "parameters": {
+    "required": ["content_file", "section"],
+    "optional": {
+      "strict_mode": false,
+      "reference_sources": ["official_documentation", "research_papers", "standards"]
+    }
+  },
+  "dependencies": [],
+  "output": {
+    "format": "json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "verification_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim": {"type": "string"},
+              "verified": {"type": "boolean"},
+              "confidence": {"type": "number"},
+              "reference": {"type": "string"},
+              "status": {"type": "string", "enum": ["verified", "unverified", "incorrect"]}
+            }
+          }
+        },
+        "accuracy_score": {"type": "number"},
+        "issues_found": {"type": "number"}
+      }
+    }
+  },
+  "implementation": {
+    "type": "claude-task",
+    "task_type": "fact-checking",
+    "script": "fact_check.py"
+  }
+}

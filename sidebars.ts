@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'chatbot-integration',
+        'reusable-intelligence-system',
         'intro',
         'chapter1-fundamentals',
         'chapter2-ros2',

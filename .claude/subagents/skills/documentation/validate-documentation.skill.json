@@ -1,0 +1,42 @@
+{
+  "skillId": "doc-validator",
+  "name": "Documentation Validator",
+  "description": "Validates documentation structure, content, and formatting consistency across all book chapters",
+  "category": "documentation",
+  "triggers": ["git-commit", "file-change", "manual"],
+  "parameters": {
+    "required": ["files"],
+    "optional": {
+      "strict": false,
+      "report_format": "json"
+    }
+  },
+  "dependencies": [],
+  "output": {
+    "format": "json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "valid": {"type": "boolean"},
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {"type": "string"},
+              "line": {"type": "number"},
+              "issue": {"type": "string"},
+              "severity": {"type": "string", "enum": ["error", "warning", "info"]}
+            }
+          }
+        },
+        "summary": {"type": "object"}
+      }
+    }
+  },
+  "implementation": {
+    "type": "claude-task",
+    "task_type": "documentation-validation",
+    "script": "validate_docs.py"
+  }
+}

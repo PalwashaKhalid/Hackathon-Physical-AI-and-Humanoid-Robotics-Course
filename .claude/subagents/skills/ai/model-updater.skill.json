@@ -1,0 +1,34 @@
+{
+  "skillId": "model-updater",
+  "name": "AI Model Updater",
+  "description": "Automatically updates and manages AI models used in the RAG system",
+  "category": "ai",
+  "triggers": ["schedule", "performance-alert", "manual"],
+  "parameters": {
+    "required": ["model_config"],
+    "optional": {
+      "check_for_updates": true,
+      "performance_threshold": 0.85,
+      "backup_model": true
+    }
+  },
+  "dependencies": [],
+  "output": {
+    "format": "json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "update_performed": {"type": "boolean"},
+        "old_version": {"type": "string"},
+        "new_version": {"type": "string"},
+        "performance_improvement": {"type": "number"},
+        "status": {"type": "string", "enum": ["success", "failed", "skipped"]}
+      }
+    }
+  },
+  "implementation": {
+    "type": "claude-task",
+    "task_type": "model-management",
+    "script": "update_model.py"
+  }
+}

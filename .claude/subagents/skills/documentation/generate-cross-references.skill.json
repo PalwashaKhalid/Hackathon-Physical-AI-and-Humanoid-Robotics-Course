@@ -1,0 +1,42 @@
+{
+  "skillId": "auto-linker",
+  "name": "Auto Cross-Reference Generator",
+  "description": "Automatically creates cross-references between related content in book chapters",
+  "category": "documentation",
+  "triggers": ["file-change", "schedule", "manual"],
+  "parameters": {
+    "required": ["target_files"],
+    "optional": {
+      "similarity_threshold": 0.7,
+      "max_references": 5
+    }
+  },
+  "dependencies": ["doc-validator"],
+  "output": {
+    "format": "json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "updated_files": {"type": "array", "items": {"type": "string"}},
+        "references_added": {"type": "number"},
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source_file": {"type": "string"},
+              "target_file": {"type": "string"},
+              "similarity": {"type": "number"},
+              "proposed_link": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "implementation": {
+    "type": "claude-task",
+    "task_type": "cross-reference-generation",
+    "script": "generate_xrefs.py"
+  }
+}

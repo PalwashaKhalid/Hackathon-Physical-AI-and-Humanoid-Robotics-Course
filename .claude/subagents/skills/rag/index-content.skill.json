@@ -1,0 +1,32 @@
+{
+  "skillId": "vector-indexer",
+  "name": "Vector Content Indexer",
+  "description": "Automatically indexes new content when documentation is added or updated",
+  "category": "rag",
+  "triggers": ["file-change", "git-commit", "manual"],
+  "parameters": {
+    "required": ["content_files"],
+    "optional": {
+      "force_reindex": false,
+      "batch_size": 10
+    }
+  },
+  "dependencies": [],
+  "output": {
+    "format": "json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "indexed_count": {"type": "number"},
+        "failed_count": {"type": "number"},
+        "processing_time": {"type": "number"},
+        "vector_db_status": {"type": "string"}
+      }
+    }
+  },
+  "implementation": {
+    "type": "claude-task",
+    "task_type": "vector-indexing",
+    "script": "index_content.py"
+  }
+}
