@@ -22,6 +22,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'chatbot-integration',
         'reusable-intelligence-system',
+        'authentication-personalization',
         'intro',
         'chapter1-fundamentals',
         'chapter2-ros2',

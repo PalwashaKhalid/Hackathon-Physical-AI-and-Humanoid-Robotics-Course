@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useUserProfile } from '../../contexts/UserProfileContext';
-import './RAGChatbot.css';
+import React, { useState, useEffect } from 'react';
+import { useUserProfile } from '../contexts/UserProfileContext';
+import '../components/RAGChatbot/RAGChatbot.css';
 
-// RAG Chatbot component for Docusaurus
-const RAGChatbot = ({ apiEndpoint = 'http://localhost:8000' }) => {
-  const { session, userProfile } = useUserProfile(); // Get user context
+// Separate component for the authenticated chatbot
+const RAGChatbotWithAuth = () => {
+  const { session, userProfile } = useUserProfile();
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I'm your Physical AI & Humanoid Robotics assistant. Ask me anything about the book content!", sender: 'bot' }
+    { id: 1, text: "Hello! I'm your personalized Physical AI & Humanoid Robotics assistant. How can I help you today?", sender: 'bot' }
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedText, setSelectedText] = useState('');
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = React.useRef(null);
 
   // Function to scroll to bottom of messages
   const scrollToBottom = () => {
@@ -57,11 +57,11 @@ const RAGChatbot = ({ apiEndpoint = 'http://localhost:8000' }) => {
       const payload = {
         question: inputText,
         context: selectedText || null,  // Include selected text context if available
-        user_id: userProfile?.user_id  // Include user ID for personalization if available
+        user_id: userProfile?.user_id  // Include user ID for personalization
       };
 
       // Call the backend API
-      const response = await fetch(`${apiEndpoint}/chat`, {
+      const response = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const RAGChatbot = ({ apiEndpoint = 'http://localhost:8000' }) => {
   // Function to clear chat
   const clearChat = () => {
     setMessages([
-      { id: 1, text: "Hello! I'm your Physical AI & Humanoid Robotics assistant. Ask me anything about the book content!", sender: 'bot' }
+      { id: 1, text: "Hello! I'm your personalized Physical AI & Humanoid Robotics assistant. How can I help you today?", sender: 'bot' }
     ]);
     setSelectedText('');
   };
@@ -120,7 +120,7 @@ const RAGChatbot = ({ apiEndpoint = 'http://localhost:8000' }) => {
   return (
     <div className="rag-chatbot">
       <div className="chat-header">
-        <h3>Physical AI Assistant</h3>
+        <h3>Personalized AI Assistant</h3>
         <button onClick={clearChat} className="clear-btn">Clear Chat</button>
       </div>
 
@@ -190,4 +190,85 @@ const RAGChatbot = ({ apiEndpoint = 'http://localhost:8000' }) => {
   );
 };
 
-export default RAGChatbot;
+const Dashboard = () => {
+  const { session, userProfile, loading } = useUserProfile();
+  const [personalizedContent, setPersonalizedContent] = useState(null);
+
+  useEffect(() => {
+    const fetchPersonalizedContent = async () => {
+      if (userProfile?.user_id) {
+        try {
+          const response = await fetch(`/api/auth/personalized-content/${userProfile.user_id}`);
+          if (response.ok) {
+            const data = await response.json();
+            setPersonalizedContent(data);
+          }
+        } catch (error) {
+          console.error('Error fetching personalized content:', error);
+        }
+      }
+    };
+
+    if (userProfile) {
+      fetchPersonalizedContent();
+    }
+  }, [userProfile]);
+
+  if (loading) {
+    return <div className="dashboard-container">Loading...</div>;
+  }
+
+  if (!session) {
+    return (
+      <div className="dashboard-container">
+        <h1>Access Denied</h1>
+        <p>Please sign in to access the dashboard.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="dashboard-container">
+      <div className="dashboard-header">
+        <h1>Welcome back, {session.user?.name || 'User'}!</h1>
+        <p>Here's your personalized learning experience based on your profile.</p>
+      </div>
+
+      {userProfile && (
+        <div className="user-profile-summary">
+          <h2>Your Profile</h2>
+          <div className="profile-info">
+            <p><strong>Experience Level:</strong> {userProfile.experience_level || 'Not specified'}</p>
+            <p><strong>Role:</strong> {userProfile.role || 'Not specified'}</p>
+            <p><strong>Interests:</strong> {userProfile.robotics_interest?.join(', ') || 'Not specified'}</p>
+            <p><strong>Learning Goal:</strong> {userProfile.learning_goal || 'Not specified'}</p>
+          </div>
+        </div>
+      )}
+
+      {personalizedContent && personalizedContent.recommendations.length > 0 && (
+        <div className="recommendations-section">
+          <h2>Recommended for You</h2>
+          <div className="recommendations-list">
+            {personalizedContent.recommendations.map((rec, index) => (
+              <div key={index} className="recommendation-card">
+                <h3>{rec.title}</h3>
+                <p>{rec.description}</p>
+                <a href={rec.link} className="recommendation-link">Explore Content</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="dashboard-chatbot">
+        <h2>Your Personalized Assistant</h2>
+        <div style={{ height: '500px' }}>
+          <RAGChatbotWithAuth />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

@@ -8,6 +8,7 @@ import glob
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from vector_db.qdrant_db import QdrantVectorDB
 from dotenv import load_dotenv
+from auth_routes import router as auth_router
 
 # Load environment variables
 load_dotenv()
@@ -27,11 +28,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include authentication routes
+app.include_router(auth_router)
+
 # Pydantic models
 class QuestionRequest(BaseModel):
     question: str
     context: Optional[str] = None  # User-selected text context
     max_tokens: Optional[int] = 500
+    user_id: Optional[str] = None  # User ID for personalization
 
 class ChatResponse(BaseModel):
     answer: str
@@ -125,6 +130,41 @@ async def chat_endpoint(request: QuestionRequest):
     based on the book content using RAG.
     """
     try:
+        # Get user profile if user_id is provided for personalization
+        user_profile = None
+        if request.user_id:
+            try:
+                # Import the auth routes to access the database functions
+                from auth_routes import get_db_connection
+                import json
+
+                conn = get_db_connection()
+                cursor = conn.cursor()
+
+                cursor.execute('''
+                    SELECT experience_level, role, programming_experience, robotics_interest,
+                           learning_goal, hardware_access, primary_platform, preferences
+                    FROM user_profiles WHERE user_id = ?
+                ''', (request.user_id,))
+
+                row = cursor.fetchone()
+                conn.close()
+
+                if row:
+                    user_profile = {
+                        "experience_level": row[0],
+                        "role": row[1],
+                        "programming_experience": json.loads(row[2]) if row[2] else [],
+                        "robotics_interest": json.loads(row[3]) if row[3] else [],
+                        "learning_goal": row[4],
+                        "hardware_access": bool(row[5]),
+                        "primary_platform": row[6],
+                        "preferences": json.loads(row[7]) if row[7] else {}
+                    }
+            except Exception as e:
+                print(f"Error fetching user profile: {e}")
+                # Continue without personalization if profile fetch fails
+
         # If user provides context, use that primarily
         if request.context and len(request.context.strip()) > 10:
             # Use the user-provided context as the primary source
@@ -144,6 +184,12 @@ async def chat_endpoint(request: QuestionRequest):
                 confidence=0.0
             )
 
+        # Apply personalization if user profile exists
+        if user_profile:
+            from auth_routes import PersonalizationEngine
+            # Re-rank chunks based on user interests
+            relevant_chunks = PersonalizationEngine.prioritize_content_chunks(relevant_chunks, user_profile)
+
         # Construct context from retrieved chunks
         context_text = "\n\n".join([chunk['content'] for chunk in relevant_chunks])
         sources = list(set([chunk['metadata']['source'] for chunk in relevant_chunks if chunk['metadata']['source'] != 'user_selected_text']))
@@ -151,6 +197,11 @@ async def chat_endpoint(request: QuestionRequest):
         # In a real implementation, you would call an LLM here to generate the answer
         # For this implementation, we'll return a formatted response based on retrieved content
         answer = f"Based on the Physical AI & Humanoid Robotics book:\n\n{context_text}\n\nFor more details, see the relevant sections in the book."
+
+        # Apply response personalization based on user experience level
+        if user_profile:
+            from auth_routes import PersonalizationEngine
+            answer = PersonalizationEngine.adjust_response_complexity(answer, user_profile.get('experience_level'))
 
         # Calculate confidence based on number of relevant chunks and their scores
         avg_score = sum([chunk.get('score', 0) for chunk in relevant_chunks]) / len(relevant_chunks)
