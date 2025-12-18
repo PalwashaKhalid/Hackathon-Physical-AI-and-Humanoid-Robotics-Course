@@ -1,29 +1,21 @@
 ---
-slug: welcome
-title: Welcome
-authors: [slorber, yangshun]
-tags: [facebook, hello, docusaurus]
+slug: welcome-to-physical-ai-blog
+title: Welcome to the Physical AI & Humanoid Robotics Blog
+authors: [physical_ai_team]
+tags: [physical-ai, humanoid-robotics, robotics]
 ---
 
-[Docusaurus blogging features](https://docusaurus.io/docs/blog) are powered by the [blog plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog).
-
-Here are a few tips you might find useful.
+Welcome to the blog for our comprehensive guide on Physical AI and Humanoid Robotics! This blog will feature the latest developments, tutorials, and insights in the field of embodied artificial intelligence.
 
 <!-- truncate -->
 
-Simply add Markdown files (or folders) to the `blog` directory.
+In this blog, we'll explore the fascinating world of Physical AI - where artificial intelligence meets the physical world through robotics. Our focus encompasses four core pillars that define modern humanoid robotics:
 
-Regular blog authors can be added to `authors.yml`.
+1. **ROS 2** - The backbone of robot communication and control
+2. **Simulation Environments** - Gazebo, Unity, and Isaac Sim for testing and development
+3. **NVIDIA Isaac Platform** - Advanced robotics development with Isaac Sim
+4. **Vision-Language-Action (VLA) Systems** - Making robots understand and respond to the world
 
-The blog post date can be extracted from filenames, such as:
+We'll share practical tutorials, code examples, and cutting-edge research that bridges the gap between theoretical AI and practical robotic applications. From understanding the fundamentals of embodied intelligence to implementing complete "Voice-to-Action" humanoid robot pipelines, this blog will be your companion on the journey to mastering Physical AI.
 
-- `2019-05-30-welcome.md`
-- `2019-05-30-welcome/index.md`
-
-A blog post folder can be convenient to co-locate blog post images:
-
-![Docusaurus Plushie](./docusaurus-plushie-banner.jpeg)
-
-The blog supports tags as well!
-
-**And if you don't want a blog**: just delete this directory, and use `blog: false` in your Docusaurus config.
+Stay tuned for regular updates on robotics frameworks, simulation techniques, control algorithms, and the integration of large language models with robotic systems. Whether you're a student, researcher, or developer, you'll find valuable insights to advance your understanding and implementation of humanoid robots.

@@ -1,19 +1,44 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+physical-ai:
+  label: Physical AI
+  permalink: /physical-ai
+  description: Articles about Physical AI and embodied intelligence
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+robotics:
+  label: Robotics
+  permalink: /robotics
+  description: Robotics-related articles and tutorials
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+humanoid-robotics:
+  label: Humanoid Robotics
+  permalink: /humanoid-robotics
+  description: Content focused on humanoid robot development
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+ros2:
+  label: ROS 2
+  permalink: /ros2
+  description: Robot Operating System 2 tutorials and guides
+
+embodied-intelligence:
+  label: Embodied Intelligence
+  permalink: /embodied-intelligence
+  description: Content about intelligence emerging from physical interaction
+
+simulation:
+  label: Simulation
+  permalink: /simulation
+  description: Robot simulation environments and techniques
+
+vision-language-action:
+  label: Vision-Language-Action
+  permalink: /vision-language-action
+  description: VLA systems for robot perception and control
+
+nvidia-isaac:
+  label: NVIDIA Isaac
+  permalink: /nvidia-isaac
+  description: NVIDIA Isaac platform for robotics development
+
+control-systems:
+  label: Control Systems
+  permalink: /control-systems
+  description: Robot control algorithms and implementation

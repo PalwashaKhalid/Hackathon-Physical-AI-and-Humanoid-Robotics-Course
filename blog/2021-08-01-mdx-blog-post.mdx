@@ -1,24 +1,34 @@
 ---
-slug: mdx-blog-post
-title: MDX Blog Post
-authors: [slorber]
-tags: [docusaurus]
+slug: interactive-robot-simulation
+title: Interactive Robot Simulation with Modern Tools
+authors: [robotics_engineer]
+tags: [simulation, robotics, nvidia-isaac]
 ---
 
-Blog posts support [Docusaurus Markdown features](https://docusaurus.io/docs/markdown-features), such as [MDX](https://mdxjs.com/).
+Modern robotics development benefits from interactive simulation environments that allow developers to test and refine robot behaviors before deploying to real hardware. Using tools like Isaac Sim, Gazebo, and Unity, we can create rich, interactive environments for humanoid robot development.
 
 :::tip
 
-Use the power of React to create interactive blog posts.
+Interactive simulation is crucial for humanoid robotics, allowing safe testing of complex behaviors without risk of hardware damage.
 
 :::
 
 {/* truncate */}
 
-For example, use JSX to create an interactive button:
+For example, we can visualize robot joint states in real-time during simulation using standard HTML and CSS:
 
-```js
-<button onClick={() => alert('button clicked!')}>Click me!</button>
+```jsx
+// Example of robot joint visualization
+const jointStates = [
+  { name: 'Hip Joint', position: 0.1, limit: [-1.57, 1.57] },
+  { name: 'Knee Joint', position: 0.2, limit: [0, 1.57] },
+  { name: 'Ankle Joint', position: 0.05, limit: [-0.5, 0.5] }
+];
+
+// Render joint states in a simple format
+jointStates.forEach(joint => {
+  console.log(`${joint.name}: ${joint.position.toFixed(3)} rad`);
+});
 ```
 
-<button onClick={() => alert('button clicked!')}>Click me!</button>
+In our simulation environments, we can create visual indicators for each joint's position, helping developers quickly identify potential issues with robot kinematics or control algorithms. This real-time feedback is essential for debugging complex humanoid robot behaviors.

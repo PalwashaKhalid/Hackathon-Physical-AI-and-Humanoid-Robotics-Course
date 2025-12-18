@@ -2,46 +2,45 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Physical AI & Humanoid Robotics
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the comprehensive guide on **Physical AI & Humanoid Robotics**. This book will guide you through the fascinating world of embodied intelligence, teaching you how to build, simulate, and control humanoid robots using modern tools and frameworks.
+
+## About This Book
+
+This book covers four core pillars of Physical AI development:
+
+1. **ROS 2** - The backbone of robot communication and control
+2. **Simulation Environments** - Gazebo and Unity for testing and development
+3. **NVIDIA Isaac Platform** - Advanced robotics development with Isaac Sim
+4. **Vision-Language-Action (VLA) Systems** - Making robots understand and respond to the world
+
+## What You'll Learn
+
+By the end of this book, you will be able to:
+
+- Understand the fundamentals of Physical AI and embodied intelligence
+- Set up and configure ROS 2 for humanoid robot control
+- Create and simulate humanoid robots in Gazebo and Unity
+- Integrate NVIDIA Isaac platform for advanced robotics development
+- Build a complete "Voice-to-Action" humanoid robot pipeline
+
+## Interactive Learning Assistant
+
+<div className="rag-chatbot-container">
+  <h3>Ask the Physical AI Assistant</h3>
+  <p>Have questions about the content? Select text on this page and ask our RAG-powered assistant!</p>
+  <div style={{height: '500px', margin: '20px 0'}}>
+    <RAGChatbot apiEndpoint="http://localhost:8000" />
+  </div>
+</div>
+
+## Target Audience
+
+This book is designed for students and developers interested in learning about embodied intelligence, ROS 2, simulation environments, and NVIDIA Isaac for humanoid robots. Prior programming knowledge is helpful but not required for the basics.
 
 ## Getting Started
 
-Get started by **creating a new site**.
+Ready to dive into the exciting world of Physical AI? Continue to the next chapter to begin your journey into the fundamentals of Physical AI.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+import RAGChatbot from '@site/src/components/RAGChatbot';
