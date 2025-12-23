@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300">
+  <!-- Robot Body -->
+  <rect x="80" y="100" width="40" height="80" fill="#4a90e2" stroke="#333" stroke-width="2"/>
+
+  <!-- Robot Head -->
+  <circle cx="100" cy="70" r="25" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+
+  <!-- Robot Eyes -->
+  <circle cx="90" cy="65" r="4" fill="#333"/>
+  <circle cx="110" cy="65" r="4" fill="#333"/>
+
+  <!-- Robot Arms -->
+  <line x1="60" y1="110" x2="80" y2="110" stroke="#333" stroke-width="4"/>
+  <line x1="120" y1="110" x2="140" y2="110" stroke="#333" stroke-width="4"/>
+
+  <!-- Robot Legs -->
+  <line x1="90" y1="180" x2="90" y2="220" stroke="#333" stroke-width="4"/>
+  <line x1="110" y1="180" x2="110" y2="220" stroke="#333" stroke-width="4"/>
+
+  <!-- Joint Circles -->
+  <circle cx="80" cy="110" r="5" fill="#e74c3c"/>
+  <circle cx="120" cy="110" r="5" fill="#e74c3c"/>
+  <circle cx="90" cy="180" r="5" fill="#e74c3c"/>
+  <circle cx="110" cy="180" r="5" fill="#e74c3c"/>
+
+  <!-- Label -->
+  <text x="100" y="250" text-anchor="middle" font-family="Arial" font-size="14" fill="#333">Humanoid Robot</text>
+</svg>

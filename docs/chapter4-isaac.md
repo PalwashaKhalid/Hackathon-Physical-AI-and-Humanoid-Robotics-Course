@@ -6,6 +6,8 @@ sidebar_position: 5
 
 ## Introduction to NVIDIA Isaac
 
+![NVIDIA Isaac Platform](/img/robotics/isaac-platform.svg)
+
 The NVIDIA Isaac platform is a comprehensive solution for developing, simulating, and deploying AI-powered robots. It combines NVIDIA's powerful GPU computing capabilities with specialized tools for robotics, making it particularly well-suited for humanoid robotics applications that require intensive computation for perception, planning, and control.
 
 ### Why NVIDIA Isaac for Humanoid Robotics?

@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Physical AI & Humanoid Robotics
 
+![Physical AI Concept](/img/robotics/physical-ai-concept.svg)
+
 Welcome to the comprehensive guide on **Physical AI & Humanoid Robotics**. This book will guide you through the fascinating world of embodied intelligence, teaching you how to build, simulate, and control humanoid robots using modern tools and frameworks.
 
 ## About This Book

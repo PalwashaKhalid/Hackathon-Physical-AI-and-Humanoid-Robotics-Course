@@ -21,6 +21,8 @@ ROS 2's distributed architecture enables these subsystems to communicate efficie
 
 ## ROS 2 Architecture
 
+![ROS 2 Architecture](/img/robotics/ros2-architecture.svg)
+
 ### Nodes and Communication
 
 In ROS 2, functionality is organized into **nodes** - processes that perform computation. Nodes communicate through:

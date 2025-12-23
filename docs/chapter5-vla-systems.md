@@ -6,6 +6,8 @@ sidebar_position: 6
 
 ## Introduction to Vision-Language-Action Systems
 
+![Vision-Language-Action System](/img/robotics/vla-system.svg)
+
 Vision-Language-Action (VLA) systems represent a cutting-edge approach to embodied AI that integrates visual perception, natural language understanding, and physical action. For humanoid robots, VLA systems enable intuitive human-robot interaction by allowing robots to understand verbal commands, perceive their environment, and execute appropriate physical actions.
 
 ### The VLA Paradigm

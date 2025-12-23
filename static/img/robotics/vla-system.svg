@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <!-- VLA System Diagram -->
+  <rect x="10" y="10" width="580" height="280" fill="#f8f9fa" stroke="#ccc" stroke-width="2" rx="10"/>
+
+  <!-- Vision Component -->
+  <rect x="40" y="60" width="120" height="160" fill="#4ecdc4" stroke="#333" stroke-width="2" rx="5"/>
+  <circle cx="100" cy="100" r="30" fill="#2a9d8f" stroke="#333" stroke-width="2"/>
+  <text x="100" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="white">Vision</text>
+  <text x="100" y="160" text-anchor="middle" font-family="Arial" font-size="10" fill="white">System</text>
+  <text x="100" y="180" text-anchor="middle" font-family="Arial" font-size="9" fill="white">(Cameras,</text>
+  <text x="100" y="190" text-anchor="middle" font-family="Arial" font-size="9" fill="white">LiDAR, etc.)</text>
+
+  <!-- Language Component -->
+  <rect x="240" y="60" width="120" height="160" fill="#ff9f1c" stroke="#333" stroke-width="2" rx="5"/>
+  <path d="M270,100 Q300,80 330,100 Q340,120 330,140 Q300,160 270,140 Q260,120 270,100" fill="#e9c46a" stroke="#333" stroke-width="2"/>
+  <text x="300" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">Language</text>
+  <text x="300" y="160" text-anchor="middle" font-family="Arial" font-size="10" fill="#333">System</text>
+  <text x="300" y="180" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">(Voice</text>
+  <text x="300" y="190" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">Commands)</text>
+
+  <!-- Action Component -->
+  <rect x="440" y="60" width="120" height="160" fill="#e76f51" stroke="#333" stroke-width="2" rx="5"/>
+  <path d="M470,120 L510,80 L550,120 L510,160 Z" fill="#e9c46a" stroke="#333" stroke-width="2"/>
+  <text x="500" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">Action</text>
+  <text x="500" y="160" text-anchor="middle" font-family="Arial" font-size="10" fill="#333">System</text>
+  <text x="500" y="180" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">(Robot</text>
+  <text x="500" y="190" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">Control)</text>
+
+  <!-- Central Processing Unit -->
+  <circle cx="300" cy="250" r="40" fill="#333" stroke="#333" stroke-width="2"/>
+  <text x="300" y="255" text-anchor="middle" font-family="Arial" font-size="12" fill="white">VLA</text>
+  <text x="300" y="268" text-anchor="middle" font-family="Arial" font-size="10" fill="white">Integration</text>
+
+  <!-- Arrows showing flow -->
+  <line x1="130" y1="140" x2="240" y2="140" stroke="#264653" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="360" y1="140" x2="440" y2="140" stroke="#264653" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="130" y1="250" x2="260" y2="250" stroke="#264653" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="340" y1="250" x2="470" y2="250" stroke="#264653" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="210" x2="300" y2="210" stroke="#264653" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrows from components to central unit -->
+  <line x1="100" y1="220" x2="300" y2="210" stroke="#264653" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="220" x2="300" y2="210" stroke="#264653" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="500" y1="220" x2="340" y2="210" stroke="#264653" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrowhead Marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+            refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#264653" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="300" y="35" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#333">Vision-Language-Action (VLA) System</text>
+</svg>

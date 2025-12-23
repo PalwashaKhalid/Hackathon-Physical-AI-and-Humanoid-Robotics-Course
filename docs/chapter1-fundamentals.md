@@ -54,6 +54,8 @@ Physical AI systems incorporate various learning mechanisms:
 
 ## Humanoid Robotics in Physical AI
 
+![Humanoid Robot](/img/robotics/humanoid-robot.svg)
+
 Humanoid robots represent a special class of Physical AI systems designed to resemble human form and capabilities. They offer unique advantages:
 
 - **Human-Compatible Environments**: Can operate in spaces designed for humans
