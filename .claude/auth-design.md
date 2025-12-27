@@ -1,32 +1,26 @@
-# Better Auth Implementation Design
+# Authentication and Personalization System Implementation Design
 ## User Authentication and Personalization for Physical AI & Humanoid Robotics Book
 
 ### Overview
-This document outlines the implementation plan for Better Auth integration with user background collection and personalized content delivery in the Physical AI & Humanoid Robotics book project.
+This document outlines the implementation plan for client-side authentication with user background collection and personalized content delivery in the Physical AI & Humanoid Robotics book project, designed for Vercel deployment compatibility.
 
 ### Requirements
-- Implement signup/signin using Better Auth
+- Implement signup/signin using client-side localStorage authentication
 - Collect user background information during signup
 - Personalize content based on user background
 - Integrate with existing RAG chatbot system
 - Maintain existing functionality while adding personalization
+- Ensure compatibility with Vercel static site deployment
 
 ### Architecture
 
 #### Frontend Components (Docusaurus/React)
-1. **Auth Provider Component** - Wraps the application with Better Auth context
-2. **Signup Form** - Extended form collecting user background information
-3. **Signin Form** - Standard authentication form
+1. **Auth Provider Component** - Wraps the application with localStorage-based authentication context
+2. **Signup Form** - Multi-step form collecting user background information and storing in localStorage
+3. **Signin Form** - Client-side authentication form checking localStorage
 4. **User Profile Component** - Dashboard for managing preferences
 5. **Protected Route Components** - Components that require authentication
-6. **Enhanced RAGChatbot** - Updated component that passes user context
-
-#### Backend Components (FastAPI)
-1. **Better Auth Integration** - User authentication and session management
-2. **User Profile Model** - Extended user model with background information
-3. **Personalization Engine** - Logic for customizing content delivery
-4. **Updated API Endpoints** - Modified endpoints that consider user context
-5. **Preference Management** - Endpoints for managing user preferences
+6. **Enhanced RAGChatbot** - Updated component that passes user context from localStorage
 
 ### User Background Collection Schema
 

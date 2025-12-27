@@ -122,7 +122,7 @@ The chatbot is integrated into the Docusaurus site using a React component. To a
 ```md
 import RAGChatbot from '@site/src/components/RAGChatbot';
 
-<RAGChatbot apiEndpoint="http://localhost:8000" />
+<RAGChatbot />
 ```
 
 ## Using the Chatbot
@@ -147,6 +147,41 @@ This implementation is designed to work within free tier limits:
 - Uses free sentence transformer model
 - Optional OpenAI API for enhanced responses (not required for basic functionality)
 
+## Deployment
+
+To deploy the backend API separately (required for production):
+
+### Deploy to Render (Recommended - Free Tier)
+1. Fork this repository to your GitHub account
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Click "New +" → "Web Service"
+4. Connect to your GitHub account and select your forked repository
+5. Configure the service:
+   - **Environment**: Python
+   - **Build Root**: `rag_chatbot`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn api.main:app --host 0.0.0.0 --port $PORT`
+6. **Environment Variables**:
+   - `LOCAL_QDRANT=true` (Uses in-memory storage for free tier)
+7. Click "Create Web Service"
+
+### Deploy to Railway
+1. Install Railway CLI or use the web interface
+2. Create a new project and link to your repository
+3. Set the following environment variables:
+   - `LOCAL_QDRANT=true` (for in-memory storage) or configure Qdrant Cloud
+4. Set the start command to: `cd rag_chatbot && python start_api.py`
+
+### Using the Deployed Backend
+Once deployed, update the frontend to use your backend URL:
+```md
+import RAGChatbot from '@site/src/components/RAGChatbot';
+
+<RAGChatbot apiEndpoint="https://your-deployed-backend-url.onrender.com" />
+```
+
+For complete deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Troubleshooting
 
 If you encounter issues:
@@ -155,3 +190,4 @@ If you encounter issues:
 2. Check browser console for frontend errors
 3. Ensure document files are properly loaded from the `/docs` directory
 4. Confirm environment variables are set correctly
+5. For deployed sites, ensure the backend API is accessible and CORS is configured

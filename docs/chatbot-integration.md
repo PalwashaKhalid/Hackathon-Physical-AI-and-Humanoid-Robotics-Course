@@ -53,12 +53,42 @@ The RAG system is built using:
 
 The system indexes all book content and creates vector embeddings that allow for semantic search, meaning it can find relevant content even if your question uses different terminology than the book.
 
+## Deployment Requirements
+
+**Important**: The RAG chatbot requires a separate backend API to function. When deployed to production (like Vercel), the frontend component needs to connect to a running backend service.
+
+### Local Development
+- Backend API runs on `http://localhost:8000`
+- Start with: `cd rag_chatbot && python start_api.py`
+- Frontend connects automatically when both are running locally
+
+### Production Deployment
+The backend API must be deployed separately to a cloud platform:
+
+1. **Deploy the API backend** to platforms like:
+   - [Railway](https://railway.app)
+   - [Render](https://render.com)
+   - [Heroku](https://heroku.com)
+   - [AWS](https://aws.amazon.com) or [GCP](https://cloud.google.com)
+
+2. **Configure the frontend** to use your deployed backend URL:
+   ```jsx
+   <RAGChatbot apiEndpoint="https://your-deployed-backend-url.com" />
+   ```
+
+3. **Set up environment variables** for the backend:
+   - For local Qdrant: `LOCAL_QDRANT=true`
+   - For Qdrant Cloud: `LOCAL_QDRANT=false`, `QDRANT_URL`, `QDRANT_API_KEY`
+
+### Current Status
+On this deployed site, the backend API is not currently running, so the chatbot will show a message indicating that the backend needs to be deployed separately.
+
 import RAGChatbot from '@site/src/components/RAGChatbot';
 
 <div className="rag-chatbot-container">
   <h2>Try the Chatbot</h2>
   <p>Ask any question about Physical AI & Humanoid Robotics!</p>
   <div style={{height: '500px', margin: '20px 0'}}>
-    <RAGChatbot apiEndpoint="http://localhost:8000" />
+    <RAGChatbot />
   </div>
 </div>

@@ -33,7 +33,7 @@ By the end of this book, you will be able to:
   <h3>Ask the Physical AI Assistant</h3>
   <p>Have questions about the content? Select text on this page and ask our RAG-powered assistant!</p>
   <div style={{height: '500px', margin: '20px 0'}}>
-    <RAGChatbot apiEndpoint="http://localhost:8000" />
+    <RAGChatbot />
   </div>
 </div>
 

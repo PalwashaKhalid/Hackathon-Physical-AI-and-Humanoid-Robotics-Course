@@ -1,0 +1,6 @@
+[build]
+builder = "docker"
+
+[deploy]
+startCommand = "cd rag_chatbot && python start_api.py"
+restartPolicyType = "never"
